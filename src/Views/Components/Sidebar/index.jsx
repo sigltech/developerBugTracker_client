@@ -4,6 +4,7 @@ import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { AiOutlineBug } from 'react-icons/ai';
 import { IoCreateOutline } from 'react-icons/io5';
 import { FiMinimize2 } from 'react-icons/fi';
+import { HiOutlineUserAdd } from 'react-icons/hi';
 import { CgArrowsExpandRight, CgLogOut } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +16,7 @@ export default function Sidebar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(true);
-
+    const username = window.localStorage.getItem('BT_name');
     const { user } = useSelector(state => state);
 
 
@@ -31,7 +32,7 @@ export default function Sidebar() {
 
     return (
         <div className='sidebar-container hidden md:flex grid-cols-1 bg-[#2E2E3A] w-[250px] h-screen flex-col items-center'>
-            <h1 className='mt-4 text-2xl'>Hello User</h1>
+            <h1 className='mt-4 text-2xl text-center'>Hello, <br /> <span className='font-bold text-[#E2856E] underline'>{username}</span></h1>
             <div className='mt-[15rem]'>
                 <ul>
                     <li>
@@ -57,6 +58,15 @@ export default function Sidebar() {
                                     <IoCreateOutline />
                                 </span>
                                 {sidebarOpen && <span className='nav-link-text animation-appear'>Create Bug</span>}
+                            </Link>
+                        </li>}
+                    {user.admin &&
+                        <li>
+                            <Link className='nav-Link flex items-center text-2xl font-normal mt-5 hover:underline' to='/register_user'>
+                                <span className='nav-link-icon mr-3'>
+                                    <HiOutlineUserAdd />
+                                </span>
+                                {sidebarOpen && <span className='nav-link-text animation-appear'>Register User</span>}
                             </Link>
                         </li>}
                 </ul>

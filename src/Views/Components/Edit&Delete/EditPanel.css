@@ -1,5 +1,6 @@
 .edit-panel {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
     left: 0;
     top: 0;
     margin-top: 15px;

@@ -29,7 +29,7 @@
 
 .bug-view-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     color: #ffffff;
@@ -44,7 +44,6 @@
     font-weight: bold;
     display: inline-block;
     cursor: pointer;
-    position: absolute;
     right: 4rem;
 }
 

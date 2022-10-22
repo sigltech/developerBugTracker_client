@@ -8,7 +8,10 @@ const base_URL = 'http://localhost:5050/api/';
 export const fetchBugs = createAsyncThunk('bugs/fetchBugs', async () => {
     try {
         const response = await axios.get(base_URL + 'tickets');
-        return [...response.data];
+        let sorted = response.data.sort((a, b) => {
+            return a.priority - b.priority;
+        });
+        return [...sorted];
     } catch (error) {
         return error.message;
     }

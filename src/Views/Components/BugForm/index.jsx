@@ -15,14 +15,14 @@ export default function BugForm(props) {
     const loading = useSelector(getBugsLoading);
     const [bugObject, setBugObject] = useState(new Bug(props.bug));
     const [status, setStatus] = useState('idle');
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [priority, setPriority] = useState('');
-    const [steps, setSteps] = useState('');
-    const [version, setVersion] = useState('');
-    const [assigned, setAssigned] = useState('');
-    const [creator, setCreator] = useState(user.userData.data.name);
-    const [time, setTime] = useState('');
+    const [name, setName] = useState(props.bug.name);
+    const [description, setDescription] = useState(props.bug.description);
+    const [priority, setPriority] = useState(props.bug.priority);
+    const [steps, setSteps] = useState(props.bug.steps);
+    const [version, setVersion] = useState(props.bug.version);
+    const [assigned, setAssigned] = useState(props.bug.assigned);
+    const [creator, setCreator] = useState(props.bug.creator);
+    const [time, setTime] = useState(props.bug.time);
     // bug inputs handlers
 
 
@@ -59,8 +59,6 @@ export default function BugForm(props) {
         try {
             let id = nanoid();
             setStatus('loading');
-            // dispatch(getBugsLoading(status));
-
             console.log(user.userData.data.name);
             const newBug = {
                 _id: id,
@@ -77,7 +75,6 @@ export default function BugForm(props) {
             console.log(newBug);
             console.log(user)
             setStatus('idle');
-            // dispatch(getBugsLoading(status));
             navigate('/viewbugs');
 
         } catch (error) {
@@ -134,9 +131,9 @@ export default function BugForm(props) {
                     id="priority"
                     required
                 >
-                    <option value="1">Low</option>
+                    <option value="3">Low</option>
                     <option value="2">Medium</option>
-                    <option value="3">High</option>
+                    <option value="1">High</option>
                 </select>
                 <label htmlFor="assigned" className='text-white'>Assigned:</label>
                 <select

@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Bug Tracking System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This application is a simple bug tracking system. It allows admins to create bugs, assign them to developers, and allos all users to track their progress. It also allows developers to view bugs assigned to them and mark them as resolved.
 
-In the project directory, you can run:
+## Installation(local)
 
-### `npm start`
+1. Clone the repository
+2. Run `npm install` in the root directory
+3. run `npm start` in the root directory to start the client server on port 3000
+4. In order to use the application, users must first clone the server repository and follow the instructions in the README.md file to start the server. Alternatively, the application can be used with the deployed server and client. **This has yet to be implemented but will be done soon once the MVP is completed**.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. The application is a single page application. The user is presented with a login screen. If the user does not have an account, an admin must create one for them. Once logged in, the user is presented with a list of bugs. If the user is an admin, they can create new bugs, assign them to developers, and mark them as resolved. If the user is a developer, they can view bugs assigned to them and mark them as resolved.
 
-### `npm test`
+## Technologies Used for the Client
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. React
+2. Redux
+3. React Router
+4. Axios
+5. Tailwind CSS
 
-### `npm run build`
+## Features still to be implemented
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. The ability to create new users from within the application as an admin
+2. Mobile responsiveness
+3. The ability to mark bugs as resolved from the bug list
+4. The ability to view bugs assigned to a developer from the bug list
+5. The ability to filter bugs by assigned developer
+6. The ability to filter bugs by status
+7. The ability to filter bugs by priority
+8. The ability to filter bugs by date created
+9. The ability to filter bugs by date updated
+10. The ability to filter bugs by date resolved
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

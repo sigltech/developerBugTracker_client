@@ -10,6 +10,7 @@ import EditBug from '../BugForm';
 export default function BugView(props) {
     const dispatch = useDispatch();
     const bug = new BugModel(props.bug);
+    const { user } = useSelector(state => state);
 
     const closeView = () => {
         props.clicked();
@@ -28,14 +29,14 @@ export default function BugView(props) {
     return (
         <>
             <div className='bug-view'>
-                <div className='bug-view-edit-btns'>
-                    <EditPanel editClicked={editClicked} deleteClicked={deleteClicked} />
-                </div>
                 <div className='bug-view-header'>
+                    <div className='bug-view-edit-btns'>
+                        {user.admin === 'admin' && <EditPanel editClicked={editClicked} deleteClicked={deleteClicked} />}
+                    </div>
                     <h1>{props.bug.name}</h1>
                     <span onClick={closeView}>X</span>
                 </div>
-                <BugViewSection title='Details' info={bug.details} />
+                <BugViewSection title='Description' info={bug.description} />
                 <BugViewSection title='Steps' info={bug.steps} />
                 <BugViewSection title='Priority' info={bug.priority} />
                 <BugViewSection title='App Version' info={bug.version} />
