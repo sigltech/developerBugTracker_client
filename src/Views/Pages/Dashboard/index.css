@@ -1,0 +1,6 @@
+@media only screen and (max-width: 780px) {
+    .dashboard-container {
+        display: block;
+        margin-bottom: 26rem;
+    }
+}

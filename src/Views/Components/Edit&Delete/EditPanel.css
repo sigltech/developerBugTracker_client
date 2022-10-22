@@ -1,0 +1,12 @@
+.edit-panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 15px;
+    margin-left: 5px;
+    z-index: 100;
+}
+
+.edit-panel button {
+    margin-left: 5px;
+}

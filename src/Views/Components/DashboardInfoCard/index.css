@@ -1,0 +1,10 @@
+@media only screen and (max-width: 840px) {
+    .totalbugs-info-card {
+        width: 200px;
+        height: 200px;
+    }
+
+    .totalbugs-info-card h2 {
+        font-size: 1.3rem;
+    }
+}

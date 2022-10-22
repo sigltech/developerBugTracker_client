@@ -1,0 +1,62 @@
+.login-page-container {
+    background-image: url('../../../assets/imgs/v2osk-IHKBF23A_iw-unsplash.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+.login-panel {
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 3rem 3rem 3rem;
+}
+
+.login-panel form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 2rem 3rem 3rem 3rem;
+}
+
+.login-panel h1 {
+    width: 100%;
+}
+
+.login-panel input {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    color: #000;
+}
+
+.login-panel button {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 780px) {
+    .login-panel {
+        padding: 1rem 1rem 1rem 1rem;
+        width: 95%;
+        min-width: none;
+    }
+
+    .login-panel form {
+        padding: 1rem 1rem 1rem 1rem;
+    }
+
+    .login-page-container {
+        height: 90vh;
+    }
+}

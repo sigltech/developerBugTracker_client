@@ -1,0 +1,30 @@
+.dashboard-card {
+    border-radius: 5px;
+    background-color: var(--cardColor);
+    min-width: 275px;
+    min-height: 200px;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.05);
+}
+
+.dashboard-card h2 {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.dashboard-card p {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 1.5rem;
+}

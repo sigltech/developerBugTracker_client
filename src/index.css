@@ -1,13 +1,49 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: 'Nunito', sans-serif;
+    --primaryColor: #0F1A20;
+    --buttonColor: #E2856E;
+    --cardColor: #1F2A30;
+    --backgroundColor: #2E2E3A;
+    color: #ffffff;
+    background-color: #ADA296;
+  }
+
+  .button {
+    background-color: var(--buttonColor);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 30px;
+    color: #ffffff;
+    font: normal bold 1.2rem 'Open Sans', sans-serif;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .button:hover {
+    transition: all 0.3s ease-in-out;
+    border: 2px solid var(--buttonColor);
+    background-color: transparent;
+
+  }
+
+  .transform-scale-hover:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+  }
 }
