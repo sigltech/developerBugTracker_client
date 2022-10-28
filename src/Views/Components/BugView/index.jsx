@@ -29,6 +29,7 @@ export default function BugView(props) {
 
     const handleBugStatus = (e) => {
         dispatch(updateBug({ ...bug, status: 'completed' }));
+        closeView();
     }
 
     const closeAll = () => {

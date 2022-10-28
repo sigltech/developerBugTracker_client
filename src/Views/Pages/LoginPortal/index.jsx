@@ -1,14 +1,15 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import './LoginPortal.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { authLogin } from '../../../Controllers/authController';
 import { MdOutlineAccountCircle, MdOutlinePassword } from 'react-icons/md';
+import ReactLoading from 'react-loading';
 
 export default function LoginPortal() {
     const dispatch = useDispatch();
     //eslint-disable-next-line
     const user = useSelector(state => state.user);
-    const status = useRef('idle');
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(' ');
 
     //eslint-disable-next-line
@@ -31,10 +32,10 @@ export default function LoginPortal() {
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         try {
-            status.current = 'loading';
+            setLoading(true);
             dispatch(authLogin(formInput)).then((res) => {
                 if (res.payload.data === undefined) {
-                    status.current = 'idle';
+                    setLoading(false);
                     setError(res.payload.message);
                     setTimeout(() => {
                         setError(' ');
@@ -42,13 +43,14 @@ export default function LoginPortal() {
                 }
             }).catch((err) => {
                 setError(err);
+                setLoading(false);
             });
             // set user data to local storage for persisting login
-            status.current = 'idle';
+            setLoading(false);
 
         } catch (error) {
             console.log(error);
-            status.current = 'failed';
+            setLoading(false);
         }
 
     }
@@ -90,7 +92,10 @@ export default function LoginPortal() {
                                 <p className='text-red-500 aboslute'>{error}</p>
                             }
                         </div>
-                        <button type='submit' className='button mb-0'>Login</button>
+                        <button type='submit' className='button mb-0'>
+                            {loading ?
+                                <ReactLoading type='spin' color='white' height={30} width={30} /> : 'Login'}
+                        </button>
                     </form>
                 </div>
             </div>
