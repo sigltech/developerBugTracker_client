@@ -14,6 +14,7 @@ export default function BugForm(props) {
     const [allUsers, setAllUsers] = useState([]);
     //eslint-disable-next-line
     const bugsStatus = useSelector(getBugsStatus);
+    //eslint-disable-next-line
     const user = useSelector((state) => state.user);
 
     const inputChanged = (e) => {
