@@ -1,81 +1,57 @@
 import React, { useState } from 'react'
 import './BugForm.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { selectAllBugs, getBugsStatus, getBugsError } from '../../../Controllers/redux/bugSlice';
 import Bug from '../../../Models/bugModel';
-import { addBug } from '../../../Controllers/bugController';
-import { getBugsLoading } from '../../../Controllers/redux/bugSlice';
+import { addBug, updateBug, fetchBugs } from '../../../Controllers/bugController';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
+import { getAllUsers } from '../../../Controllers/authController';
+import { useEffect } from 'react';
 
 export default function BugForm(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state);
-    const loading = useSelector(getBugsLoading);
     const [bugObject, setBugObject] = useState(new Bug(props.bug));
     const [status, setStatus] = useState('idle');
-    const [name, setName] = useState(props.bug.name);
-    const [description, setDescription] = useState(props.bug.description);
-    const [priority, setPriority] = useState(props.bug.priority);
-    const [steps, setSteps] = useState(props.bug.steps);
-    const [version, setVersion] = useState(props.bug.version);
-    const [assigned, setAssigned] = useState(props.bug.assigned);
-    const [creator, setCreator] = useState(props.bug.creator);
-    const [time, setTime] = useState(props.bug.time);
-    // bug inputs handlers
-
+    const [allUsers, setAllUsers] = useState([]);
+    const bugsStatus = useSelector(getBugsStatus);
+    const user = useSelector((state) => state.user);
 
     const inputChanged = (e) => {
-        const { name, value } = e.target;
-        switch (name) {
-            case 'name':
-                setName(value);
-                break;
-            case 'description':
-                setDescription(value);
-                break;
-            case 'priority':
-                setPriority(value);
-                break;
-            case 'steps':
-                setSteps(value);
-                break;
-            case 'version':
-                setVersion(value);
-                break;
-            case 'assigned':
-                setAssigned(value);
-                break;
-            default:
-                break;
-        }
+        setBugObject({
+            ...bugObject,
+            [e.target.name]: e.target.value
+        });
     }
+
+    useEffect(() => {
+        dispatch(getAllUsers()).then((res) => {
+            setAllUsers(res.payload);
+        });
+        console.log(user.userData);
+    }, [setAllUsers, dispatch]);
+
 
     const canSave = [bugObject.name, bugObject.details, bugObject.priority, bugObject.steps, bugObject.version].every(Boolean) && bugObject.priority > 0 && bugObject.priority < 4 && status === 'idle';
 
     const submitCreateForm = (e) => {
         e.preventDefault();
         try {
-            let id = nanoid();
-            setStatus('loading');
-            console.log(user.userData.data.name);
-            const newBug = {
-                _id: id,
-                name: name,
-                description: description,
-                priority: priority,
-                steps: steps,
-                version: version,
-                assigned: assigned,
-                creator: user.userData.data.name,
-                time: new Date().toISOString()
-            };
-            dispatch(addBug(newBug));
-            console.log(newBug);
-            console.log(user)
-            setStatus('idle');
-            navigate('/viewbugs');
+            if (props.title === 'Edit Bug') {
+                setStatus('loading');
+                dispatch(updateBug(bugObject));
+                setStatus('idle');
+                props.close();
+                dispatch(fetchBugs());
+            }
+            else {
+                setStatus('loading');
+                console.log(bugObject);
+                bugObject._id = Math.random().toString(36).substr(2, 9);
+                console.log(bugObject);
+                dispatch(addBug(bugObject));
+                setStatus('idle');
+            }
 
         } catch (error) {
             setStatus('failed');
@@ -90,7 +66,7 @@ export default function BugForm(props) {
                 <label htmlFor="name" className='text-white'>Name:</label>
                 <input
                     onChange={inputChanged}
-                    value={name}
+                    value={bugObject.name}
                     type="text"
                     name='name'
                     id='name'
@@ -101,32 +77,31 @@ export default function BugForm(props) {
                 <textarea
                     className='text-black'
                     onChange={inputChanged}
-                    value={description}
+                    value={bugObject.description}
                     name="description"
                     id="description"
                     cols="15"
                     rows="4"
-                    placeholder='Detailed description of the bug'
-                >
+                    placeholder='Detailed description of the bug' >
                 </textarea>
+
                 <label htmlFor="steps" className='text-white'>Steps:</label>
                 <textarea
                     className='text-black'
                     onChange={inputChanged}
-                    value={steps}
+                    value={bugObject.steps}
                     name="steps"
                     id="steps"
                     cols="15"
                     rows="4"
                     placeholder='Steps to re-create the bug'
                     required
-                >
-                </textarea>
+                ></textarea>
                 <label htmlFor="priority" className='text-white'>Priority:</label>
                 <select
                     className='text-black'
                     onChange={inputChanged}
-                    value={priority}
+                    value={bugObject.priority}
                     name="priority"
                     id="priority"
                     required
@@ -139,17 +114,19 @@ export default function BugForm(props) {
                 <select
                     className='text-black'
                     onChange={inputChanged}
-                    value={assigned}
+                    value={bugObject.assigned}
                     name="assigned"
-                    id="assigned">
-                    <option value="Richard Sigl">Richard Sigl</option>
-                    <option value="John Doe">John Doe</option>
+                    id="assigned"
+                >
+                    {allUsers.map((user, index) => {
+                        return <option key={index} value={user.name}>{user.name}</option>
+                    })}
                 </select>
                 <label htmlFor="version" className='text-white'>Application Version:</label>
                 <input
                     className='text-black'
                     onChange={inputChanged}
-                    value={version}
+                    value={bugObject.version}
                     type="text"
                     name='version'
                     id='version'
@@ -160,7 +137,7 @@ export default function BugForm(props) {
                     className='button'
                     type='submit'
                 >
-                    {props.title === "Edit Bug" ? "Edit" : "Create"}
+                    {props.title == "Edit Bug" ? "Edit" : "Create"}
                 </button>
             </form>
         </div>

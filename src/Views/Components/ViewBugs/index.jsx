@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DashboardCards from '../ViewCardsCards'
-import { selectAllBugs, getBugsStatus, getBugsError } from '../../../Controllers/redux/bugSlice';
+import { selectAllBugs, getBugsStatus, getBugsError, getBugsLoading } from '../../../Controllers/redux/bugSlice';
 import { fetchBugs } from '../../../Controllers/bugController';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -11,6 +11,7 @@ export default function ViewBugs() {
     const bugs = useSelector(selectAllBugs);
     const bugsStatus = useSelector(getBugsStatus);
     const bugsError = useSelector(getBugsError);
+    const bugsLoading = useSelector(getBugsLoading);
 
     const [DISPLAY_BUG, SET_DISPLAY_BUG] = useState({
         name: '',
@@ -25,18 +26,15 @@ export default function ViewBugs() {
     }
 
     useEffect(() => {
-        if (bugsStatus === 'idle') {
-            dispatch(fetchBugs());
-        } else if (bugsStatus === 'failed') {
-            console.log(bugsError);
-        }
-    }, [bugs, bugsStatus, dispatch])
+        dispatch(fetchBugs());
+
+    }, [dispatch])
 
     return (
         <>
             <div className='w-full p-10 overflow-x-hidden'>
-                <div className='p-2 h-full overflow-y-scroll w-full flex flex-wrap justify-between'>
-                    {bugs.map((bug, index) => {
+                <div className='p-2 h-full overflow-y-scroll w-full flex flex-col justify-start items-center gap-1'>
+                    {bugs && bugs.map((bug, index) => {
                         return (
                             <DashboardCards key={index} clicked={bugClicked} title={bug.name} details={bug.details} bug={bug} priority={bug.priority} />
                         )

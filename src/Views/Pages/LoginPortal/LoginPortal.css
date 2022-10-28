@@ -29,14 +29,22 @@
 }
 
 .login-panel input {
-    width: 80%;
+    outline: none;
+    opacity: 0.4;
     margin: 0 auto;
-    margin-bottom: 10px;
     padding: 10px;
-    border: none;
+    padding-left: 2.7rem;
     border-radius: 5px;
     font-size: 1.2rem;
     color: #000;
+}
+
+.login-panel input:focus {
+    opacity: 1;
+}
+
+.input-containers:hover {
+    box-shadow: 0 0 5px 2px rgb(255, 255, 255, 0.3);
 }
 
 .login-panel button {

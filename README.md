@@ -1,4 +1,4 @@
-# Bug Tracking System
+# Bug Tracking System Client
 
 ## Introduction
 

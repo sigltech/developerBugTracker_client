@@ -5,3 +5,6 @@ export { default as ViewBugs } from './ViewBugs';
 export { default as BugForm } from './BugForm';
 export { default as BugFormPage } from './BugFormPage';
 export { default as MobileMenu } from './MobileMenu';
+export { default as NewUser } from './NewUser';
+export { default as SettingsPage } from './SettingsPage';
+export { default as NewUserInfoModal } from './NewUserInfoModal';

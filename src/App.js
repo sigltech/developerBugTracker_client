@@ -2,9 +2,11 @@ import { Route, Routes } from 'react-router-dom';
 import { LoginPortal, Dashboard } from './Views/Pages';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DashboardComp, ViewBugs, BugFormPage } from './Views/Components';
+import { DashboardComp, ViewBugs, BugFormPage, NewUser, SettingsPage } from './Views/Components';
 import { authLoggedIn } from './Controllers/redux/authSlice';
 import jwt_decode from "jwt-decode";
+import { useEffect } from 'react';
+import { authLogin } from './Controllers/authController';
 
 
 function App() {
@@ -12,8 +14,14 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
-  const userToken = window.localStorage.getItem('BT_token');
-
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     const decoded = jwt_decode(token);
+  //     console.log(decoded);
+  //     // dispatch(authLogin(decoded));
+  //   }
+  // }, [dispatch]);
 
   return (
     <>
@@ -25,6 +33,8 @@ function App() {
             <Route path="/" element={<DashboardComp />} />
             <Route path="/viewbugs" element={<ViewBugs />} />
             <Route path="/create" element={<BugFormPage />} />
+            <Route path="/registerNewUser" element={<NewUser />} />
+            <Route path="/usersettings" element={<SettingsPage user={user} />} />
           </Route>
         )}
         <Route path="*" element={

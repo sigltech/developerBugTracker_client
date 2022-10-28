@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { markComplete } from '../../../Controllers/Redux/bugSlice';
 import EditPanel from '../Edit&Delete/EditPanel';
 import EditBug from '../BugForm';
+import { updateBug } from '../../../Controllers/bugController';
 
 export default function BugView(props) {
     const dispatch = useDispatch();
@@ -25,13 +26,21 @@ export default function BugView(props) {
     const deleteClicked = () => {
         props.editClicked();
     }
+    console.log(bug);
 
+    const handleBugStatus = (e) => {
+        dispatch(updateBug({ ...bug, status: 'completed' }));
+    }
+
+    const closeAll = () => {
+        closeView();
+    }
     return (
         <>
             <div className='bug-view'>
                 <div className='bug-view-header'>
                     <div className='bug-view-edit-btns'>
-                        {user.admin === 'admin' && <EditPanel editClicked={editClicked} deleteClicked={deleteClicked} />}
+                        {user.admin === true && <EditPanel editClicked={editClicked} deleteClicked={deleteClicked} />}
                     </div>
                     <h1>{props.bug.name}</h1>
                     <span onClick={closeView}>X</span>
@@ -41,9 +50,10 @@ export default function BugView(props) {
                 <BugViewSection title='Priority' info={bug.priority} />
                 <BugViewSection title='App Version' info={bug.version} />
                 <BugViewSection title='Created On' info={bug.time} />
-                <button className='button' /*onClick={() => { dispatch(markComplete()) }}*/>Mark Complete</button>
+                <BugViewSection title='status' info={bug.status} />
+                <button className='button' onClick={handleBugStatus}>Mark Complete</button>
             </div>
-            {displayEdit && <EditBug close={editClicked} title='Edit Bug' bug={bug} />}
+            {displayEdit && <EditBug closeAll={closeAll} close={editClicked} title='Edit Bug' bug={bug} />}
         </>
     )
 }

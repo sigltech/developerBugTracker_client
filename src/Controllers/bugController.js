@@ -11,7 +11,7 @@ export const fetchBugs = createAsyncThunk('bugs/fetchBugs', async () => {
         let sorted = response.data.sort((a, b) => {
             return a.priority - b.priority;
         });
-        return [...sorted];
+        return sorted;
     } catch (error) {
         return error.message;
     }
@@ -19,9 +19,36 @@ export const fetchBugs = createAsyncThunk('bugs/fetchBugs', async () => {
 
 export const addBug = createAsyncThunk('bugs/addBug', async (bug) => {
     console.log(bug);
+    bug.time = new Date().toLocaleString();
+    bug.status = 'open';
     try {
         var config = {
             method: 'post',
+            url: base_URL + 'tickets/ticket',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: bug
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    } catch (error) {
+        return error.message;
+    }
+});
+
+export const updateBug = createAsyncThunk('bugs/updateBug', async (bug) => {
+    console.log(bug);
+    try {
+        var config = {
+            method: 'put',
             url: base_URL + 'tickets/ticket',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

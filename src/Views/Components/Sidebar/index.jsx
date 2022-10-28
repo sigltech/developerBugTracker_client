@@ -22,6 +22,10 @@ export default function Sidebar() {
 
     const signOut = () => {
         dispatch(logout());
+        // delete localStorage items
+        window.localStorage.removeItem('BT_token');
+        window.localStorage.removeItem('BT_name');
+        window.localStorage.removeItem('BT_role');
         navigate('/');
 
     }
@@ -62,7 +66,7 @@ export default function Sidebar() {
                         </li>}
                     {user.admin &&
                         <li>
-                            <Link className='nav-Link flex items-center text-2xl font-normal mt-5 hover:underline' to='/register_user'>
+                            <Link className='nav-Link flex items-center text-2xl font-normal mt-5 hover:underline' to='/registerNewUser'>
                                 <span className='nav-link-icon mr-3'>
                                     <HiOutlineUserAdd />
                                 </span>
@@ -71,7 +75,14 @@ export default function Sidebar() {
                         </li>}
                 </ul>
             </div>
-            <div className='absolute bottom-10 sidebar-admin-btns'>
+            <div className='absolute bottom-10 sidebar-admin-btns flex flex-col '>
+                {sidebarOpen ?
+                    <button onClick={() => navigate('/usersettings')} className="button nav-link logout animation-appear">Settings</button>
+                    :
+                    <span className='nav-link-icon'>
+                        <CgLogOut fontSize={'30px'} />
+                    </span>
+                }
                 {sidebarOpen ?
                     <button className="button nav-link logout animation-appear" onClick={signOut}>Logout</button>
                     :

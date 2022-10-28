@@ -1,6 +1,5 @@
-import { createSlice, createAsyncThunk, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchBugs, addBug } from '../bugController.js';
-import axios from 'axios';
 
 
 export const bugSlice = createSlice({
@@ -17,11 +16,13 @@ export const bugSlice = createSlice({
         builder
             .addCase(fetchBugs.pending, (state, action) => {
                 state.status = "loading";
+                state.isLoading = true;
             })
             .addCase(fetchBugs.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 const loadedBugs = action.payload;
-                state.bugsData = state.bugsData.concat(loadedBugs);
+                state.bugsData = loadedBugs;
+                state.isLoading = false;
             })
             .addCase(fetchBugs.rejected, (state, action) => {
                 state.status = "failed";
@@ -35,7 +36,7 @@ export const bugSlice = createSlice({
                 state.status = "succeeded";
                 const newBug = action.payload;
                 console.log(newBug);
-                state.bugsData = newBug;
+                state.bugsData.concat(newBug);
                 state.isLoading = false;
             })
             .addCase(addBug.rejected, (state, action) => {

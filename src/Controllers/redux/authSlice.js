@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { authLogin, getAllUsers } from '../authController.js'
+import { authLogin, getAllUsers, authRegister } from '../authController.js'
 
 export const authSlice = createSlice({
     name: 'user',
     initialState: {
-        userData: [],
-        admin: null || window.localStorage.getItem('BT_role'),
+        AllUsers: [],
+        userData: window.localStorage.getItem('BT_user') ? JSON.parse(window.localStorage.getItem('BT_user')) : [],
+        admin: window.localStorage.getItem('BT_role') === 'admin' ? true : false,
         loggedIn: window.localStorage.getItem('BT_token') ? true : false,
         status: 'idle',
         error: null,
@@ -25,18 +26,43 @@ export const authSlice = createSlice({
             .addCase(authLogin.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 const user = action.payload;
-                state.userData = user;
-                state.loggedIn = true;
-                if (user.data.role === 'admin') {
-                    state.admin = true;
+                if (user.token !== undefined) {
+                    console.log(user);
+                    state.userData = user;
+                    state.loggedIn = true;
+                    if (user.data.role === 'admin' && user.data.role !== undefined) {
+                        state.admin = true;
+                    } else if (user.data.role === (undefined || null)) {
+                        state.admin = false;
+                    } else {
+                        state.admin = false;
+                    }
                 } else {
-                    state.admin = false;
+                    state.error = user;
                 }
             })
             .addCase(authLogin.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })
+            .addCase(authRegister.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(authRegister.fulfilled, (state) => {
+                state.status = 'succeeded'
+            })
+            .addCase(getAllUsers.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.AllUsers = action.payload
+            })
+            .addCase(getAllUsers.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+
     }
 })
 
