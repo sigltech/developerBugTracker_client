@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-const base_URL = 'http://localhost:5050/api/';
+const base_URL = 'https://developerbugtracker-server.onrender.com/api/';
 
 
 export const fetchBugs = createAsyncThunk('bugs/fetchBugs', async () => {

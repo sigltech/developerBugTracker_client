@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-const base_URL = 'http://127.0.0.1:5050/api/auth/users';
+const base_URL = 'https://developerbugtracker-server.onrender.com/api/';
 
 export const authLogin = createAsyncThunk('user/authLogin', async (user) => {
     try {
-        const response = await axios.post(base_URL + "/login", user, {
+        const response = await axios.post(base_URL + "auth/users/login", user, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -32,7 +32,7 @@ export const authRegister = createAsyncThunk('user/authRegister', async (user) =
     let randomPassword = Math.random().toString(36).substr(2, 8);
     user.password = randomPassword;
     try {
-        const response = await axios.post(base_URL + "/register", user, {
+        const response = await axios.post(base_URL + "auth/users/register", user, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -46,7 +46,7 @@ export const authRegister = createAsyncThunk('user/authRegister', async (user) =
 
 export const getAllUsers = createAsyncThunk('user/getAllUsers', async () => {
     try {
-        const response = await axios.get(base_URL);
+        const response = await axios.get(base_URL + 'auth/users');
         return response.data;
     } catch (error) {
         return error.message;
@@ -55,7 +55,7 @@ export const getAllUsers = createAsyncThunk('user/getAllUsers', async () => {
 
 export const checkPassword = createAsyncThunk('user/checkPassword', async (user) => {
     try {
-        const response = await axios.post(base_URL + "/checkPassword", user, {
+        const response = await axios.post(base_URL + "auth/users/checkPassword", user, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -68,7 +68,7 @@ export const checkPassword = createAsyncThunk('user/checkPassword', async (user)
 
 export const updateUser = createAsyncThunk('user/updateUser', async (user) => {
     try {
-        const response = await axios.put(base_URL + "/modify", user, {
+        const response = await axios.put(base_URL + "auth/users/modify", user, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }

@@ -12,6 +12,7 @@ export default function DashboardComp() {
     // const { data, error, isLoading } = useGetBugsQuery();
     const bugs = useSelector(selectAllBugs);
     const bugsStatus = useSelector(getBugsStatus);
+    //eslint-disable-next-line
     const bugsError = useSelector(getBugsError);
 
     let highCount = 0;
