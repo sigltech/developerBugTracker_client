@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { AiOutlineBug } from 'react-icons/ai';
 import { IoCreateOutline } from 'react-icons/io5';
+//eslint-disable-next-line
 import { FiMinimize2 } from 'react-icons/fi';
 import { HiOutlineUserAdd } from 'react-icons/hi';
+//eslint-disable-next-line
 import { CgArrowsExpandRight, CgLogOut } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +32,7 @@ export default function Sidebar() {
 
     }
 
+    //eslint-disable-next-line
     const handleCloseSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     }

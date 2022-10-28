@@ -1,17 +1,17 @@
 import React, { useRef, useState } from 'react'
 import './LoginPortal.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { authLogin } from '../../../Controllers/authController';
-import { authLoggedIn, authUser } from '../../../Controllers/redux/authSlice';
 import { MdOutlineAccountCircle, MdOutlinePassword } from 'react-icons/md';
 
 export default function LoginPortal() {
     const dispatch = useDispatch();
+    //eslint-disable-next-line
     const user = useSelector(state => state.user);
     const status = useRef('idle');
     const [error, setError] = useState(' ');
 
+    //eslint-disable-next-line
     const inputFocus = (e) => {
         e.target.parentElement.classList.add('focus');
     }

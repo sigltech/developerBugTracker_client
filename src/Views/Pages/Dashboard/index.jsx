@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react'
-import { Sidebar, DashboardComp, MobileMenu } from '../../Components/'
+import { Sidebar, MobileMenu } from '../../Components/'
 import { Outlet } from 'react-router-dom'
 import './index.css'
-import { selectAllBugs, getBugsStatus, getBugsError, getBugsLoading } from '../../../Controllers/redux/bugSlice';
+import { selectAllBugs, getBugsStatus, getBugsError } from '../../../Controllers/redux/bugSlice';
 import { fetchBugs } from '../../../Controllers/bugController';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Dashboard() {
     const dispatch = useDispatch();
 
+    //eslint-disable-next-line
     const bugs = useSelector(selectAllBugs);
+    //eslint-disable-next-line
     const bugsStatus = useSelector(getBugsStatus);
+    //eslint-disable-next-line
     const bugsError = useSelector(getBugsError);
 
     useEffect(() => {

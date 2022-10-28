@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import './BugForm.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllBugs, getBugsStatus, getBugsError } from '../../../Controllers/redux/bugSlice';
+import { getBugsStatus } from '../../../Controllers/redux/bugSlice';
 import Bug from '../../../Models/bugModel';
 import { addBug, updateBug, fetchBugs } from '../../../Controllers/bugController';
-import { useNavigate } from 'react-router-dom';
 import { getAllUsers } from '../../../Controllers/authController';
 import { useEffect } from 'react';
 
 export default function BugForm(props) {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [bugObject, setBugObject] = useState(new Bug(props.bug));
     const [status, setStatus] = useState('idle');
     const [allUsers, setAllUsers] = useState([]);
+    //eslint-disable-next-line
     const bugsStatus = useSelector(getBugsStatus);
     const user = useSelector((state) => state.user);
 
@@ -29,10 +28,18 @@ export default function BugForm(props) {
             setAllUsers(res.payload);
         });
         console.log(user.userData);
+        //eslint-disable-next-line
     }, [setAllUsers, dispatch]);
 
-
-    const canSave = [bugObject.name, bugObject.details, bugObject.priority, bugObject.steps, bugObject.version].every(Boolean) && bugObject.priority > 0 && bugObject.priority < 4 && status === 'idle';
+    //eslint-disable-next-line
+    const canSave =
+        [
+            bugObject.name,
+            bugObject.details,
+            bugObject.priority,
+            bugObject.steps,
+            bugObject.version
+        ].every(Boolean) && bugObject.priority > 0 && bugObject.priority < 4 && status === 'idle';
 
     const submitCreateForm = (e) => {
         e.preventDefault();
@@ -61,7 +68,7 @@ export default function BugForm(props) {
     return (
         <div className='bug-create'>
             <h1>{props.title}</h1>
-            {props.title == 'Edit Bug' && <span className='close-btn' onClick={props.close}>X</span>}
+            {props.title === 'Edit Bug' && <span className='close-btn' onClick={props.close}>X</span>}
             <form>
                 <label htmlFor="name" className='text-white'>Name:</label>
                 <input
@@ -137,7 +144,7 @@ export default function BugForm(props) {
                     className='button'
                     type='submit'
                 >
-                    {props.title == "Edit Bug" ? "Edit" : "Create"}
+                    {props.title === "Edit Bug" ? "Edit" : "Create"}
                 </button>
             </form>
         </div>

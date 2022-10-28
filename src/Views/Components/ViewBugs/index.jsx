@@ -9,8 +9,11 @@ import BugView from '../BugView';
 export default function ViewBugs() {
     const dispatch = useDispatch();
     const bugs = useSelector(selectAllBugs);
+    //eslint-disable-next-line
     const bugsStatus = useSelector(getBugsStatus);
+    //eslint-disable-next-line
     const bugsError = useSelector(getBugsError);
+    //eslint-disable-next-line
     const bugsLoading = useSelector(getBugsLoading);
 
     const [DISPLAY_BUG, SET_DISPLAY_BUG] = useState({

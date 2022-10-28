@@ -1,17 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import { LoginPortal, Dashboard } from './Views/Pages';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { DashboardComp, ViewBugs, BugFormPage, NewUser, SettingsPage } from './Views/Components';
-import { authLoggedIn } from './Controllers/redux/authSlice';
-import jwt_decode from "jwt-decode";
-import { useEffect } from 'react';
-import { authLogin } from './Controllers/authController';
 
 
 function App() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
   // useEffect(() => {
