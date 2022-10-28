@@ -33,7 +33,6 @@ export default function LoginPortal() {
         try {
             status.current = 'loading';
             dispatch(authLogin(formInput)).then((res) => {
-                console.log(res);
                 if (res.payload.data === undefined) {
                     status.current = 'idle';
                     setError(res.payload.message);

@@ -27,7 +27,6 @@ export const authSlice = createSlice({
                 state.status = 'succeeded';
                 const user = action.payload;
                 if (user.token !== undefined) {
-                    console.log(user);
                     state.userData = user;
                     state.loggedIn = true;
                     if (user.data.role === 'admin' && user.data.role !== undefined) {

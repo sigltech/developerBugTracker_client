@@ -9,15 +9,6 @@ function App() {
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     const decoded = jwt_decode(token);
-  //     console.log(decoded);
-  //     // dispatch(authLogin(decoded));
-  //   }
-  // }, [dispatch]);
-
   return (
     <>
       <Routes>

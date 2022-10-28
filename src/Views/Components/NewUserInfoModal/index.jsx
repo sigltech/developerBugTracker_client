@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function NewUserInfoModal(props) {
-    console.log(props.newUser);
     return (
         <div id='new-user-details-popup'
             className={props.newUserModal ? 'absolute rounded-lg flex flex-col justify-center items-center right-22 h-[40%] bg-[#2E2E3A] w-[60%]' : 'hidden'}

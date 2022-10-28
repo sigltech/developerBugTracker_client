@@ -27,7 +27,6 @@ export default function BugForm(props) {
         dispatch(getAllUsers()).then((res) => {
             setAllUsers(res.payload);
         });
-        console.log(user.userData);
         //eslint-disable-next-line
     }, [setAllUsers, dispatch]);
 
@@ -53,9 +52,7 @@ export default function BugForm(props) {
             }
             else {
                 setStatus('loading');
-                console.log(bugObject);
                 bugObject._id = Math.random().toString(36).substr(2, 9);
-                console.log(bugObject);
                 dispatch(addBug(bugObject));
                 setStatus('idle');
             }

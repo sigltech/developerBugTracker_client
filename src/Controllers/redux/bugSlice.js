@@ -35,7 +35,6 @@ export const bugSlice = createSlice({
             .addCase(addBug.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 const newBug = action.payload;
-                console.log(newBug);
                 state.bugsData.concat(newBug);
                 state.isLoading = false;
             })

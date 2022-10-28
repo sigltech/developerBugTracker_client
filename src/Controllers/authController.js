@@ -37,7 +37,6 @@ export const authRegister = createAsyncThunk('user/authRegister', async (user) =
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         return error.message;
@@ -61,7 +60,6 @@ export const checkPassword = createAsyncThunk('user/checkPassword', async (user)
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         return error.message;
@@ -75,7 +73,6 @@ export const updateUser = createAsyncThunk('user/updateUser', async (user) => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         return error.message;

@@ -18,7 +18,6 @@ export const fetchBugs = createAsyncThunk('bugs/fetchBugs', async () => {
 });
 
 export const addBug = createAsyncThunk('bugs/addBug', async (bug) => {
-    console.log(bug);
     bug.time = new Date().toLocaleString();
     bug.status = 'open';
     try {
@@ -33,7 +32,7 @@ export const addBug = createAsyncThunk('bugs/addBug', async (bug) => {
 
         axios(config)
             .then(function (response) {
-                console.log(JSON.stringify(response.data));
+                return response.data;
             })
             .catch(function (error) {
                 console.log(error);
@@ -45,7 +44,6 @@ export const addBug = createAsyncThunk('bugs/addBug', async (bug) => {
 });
 
 export const updateBug = createAsyncThunk('bugs/updateBug', async (bug) => {
-    console.log(bug);
     try {
         var config = {
             method: 'put',
@@ -58,7 +56,7 @@ export const updateBug = createAsyncThunk('bugs/updateBug', async (bug) => {
 
         axios(config)
             .then(function (response) {
-                console.log(JSON.stringify(response.data));
+                return response.data;
             })
             .catch(function (error) {
                 console.log(error);

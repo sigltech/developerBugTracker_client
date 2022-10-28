@@ -18,7 +18,6 @@ export default function SettingsPage(props) {
     const [passChangeSuccess, setPassChangeSuccess] = useState(false);
 
     const checkPasswordMatch = (e) => {
-        console.log(e.target.value);
         setPasswordConfirm(e.target.value);
         if (e.target.value === password) {
             setPasswordMatch(true);
@@ -29,8 +28,6 @@ export default function SettingsPage(props) {
         setOldPassword(e.target.value);
     }
 
-    console.log(props.user.userData.data.name);
-
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -40,7 +37,6 @@ export default function SettingsPage(props) {
             password: oldPassword,
             name: props.user.userData.data.name
         })).then((res) => {
-            console.log(res);
             if (res.payload.message === 'Password is correct') {
                 setOldPasswordConfirm(true);
             } else {
@@ -49,7 +45,6 @@ export default function SettingsPage(props) {
 
             // if old password is correct, update password
             if (passwordMatch && oldPasswordConfirm === true) {
-                console.log('passwords match');
                 dispatch(updateUser({
                     name: props.user.userData.data.name,
                     password: password

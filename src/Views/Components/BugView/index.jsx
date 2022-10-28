@@ -26,7 +26,6 @@ export default function BugView(props) {
     const deleteClicked = () => {
         props.editClicked();
     }
-    console.log(bug);
 
     const handleBugStatus = (e) => {
         dispatch(updateBug({ ...bug, status: 'completed' }));
