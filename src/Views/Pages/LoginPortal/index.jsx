@@ -35,18 +35,17 @@ export default function LoginPortal() {
             setLoading(true);
             dispatch(authLogin(formInput)).then((res) => {
                 if (res.payload.data === undefined) {
-                    setLoading(false);
                     setError(res.payload.message);
                     setTimeout(() => {
                         setError(' ');
                     }, 2000);
                 }
+                setLoading(false);
             }).catch((err) => {
                 setError(err);
                 setLoading(false);
             });
             // set user data to local storage for persisting login
-            setLoading(false);
 
         } catch (error) {
             console.log(error);
@@ -94,7 +93,7 @@ export default function LoginPortal() {
                         </div>
                         <button type='submit' className='button mb-0'>
                             {loading ?
-                                <ReactLoading type='spin' color='white' height={30} width={30} /> : 'Login'}
+                                <span><ReactLoading type='spin' color='white' height={20} width={20} /></span> : 'Login'}
                         </button>
                     </form>
                 </div>
