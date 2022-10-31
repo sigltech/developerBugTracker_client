@@ -6,9 +6,12 @@ import Bug from '../../../Models/bugModel';
 import { addBug, updateBug, fetchBugs } from '../../../Controllers/bugController';
 import { getAllUsers } from '../../../Controllers/authController';
 import { useEffect } from 'react';
+import ReactLoading from 'react-loading';
+import { useNavigate } from 'react-router-dom';
 
 export default function BugForm(props) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [bugObject, setBugObject] = useState(new Bug(props.bug));
     const [status, setStatus] = useState('idle');
     const [allUsers, setAllUsers] = useState([]);
@@ -48,14 +51,16 @@ export default function BugForm(props) {
                 setStatus('loading');
                 dispatch(updateBug(bugObject));
                 setStatus('idle');
-                props.close();
                 dispatch(fetchBugs());
+                navigate('/viewbugs');
+                props.close();
             }
             else {
                 setStatus('loading');
                 bugObject._id = Math.random().toString(36).substr(2, 9);
                 dispatch(addBug(bugObject));
                 setStatus('idle');
+                props.close();
             }
 
         } catch (error) {
@@ -142,7 +147,10 @@ export default function BugForm(props) {
                     className='button'
                     type='submit'
                 >
-                    {props.title === "Edit Bug" ? "Edit" : "Create"}
+                    {status === 'loading' ?
+                        <span><ReactLoading type='spin' color='white' height={20} width={20} /></span>
+                        :
+                        props.title === "Edit Bug" ? "Edit" : "Create"}
                 </button>
             </form>
         </div>

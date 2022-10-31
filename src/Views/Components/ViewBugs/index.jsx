@@ -15,8 +15,22 @@ export default function ViewBugs() {
     const bugsError = useSelector(getBugsError);
     //eslint-disable-next-line
     const bugsLoading = useSelector(getBugsLoading);
+
     // state to manage the sorting of bugs
-    const [sort, setSort] = useState('all');
+    const [filters, setFilters] = useState({
+        name: '',
+        priority: '',
+        status: 'all',
+    });
+
+    const changeFilters = (e) => {
+        setFilters({
+            ...filters,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const user = useSelector((state) => state.user);
 
     const [DISPLAY_BUG, SET_DISPLAY_BUG] = useState({
         name: '',
@@ -24,6 +38,7 @@ export default function ViewBugs() {
     });
 
     // set the bug to display in the info modal
+    //eslint-disable-next-line
     const bugClicked = (name) => {
         SET_DISPLAY_BUG({
             isDisplayed: !DISPLAY_BUG.isDisplayed,
@@ -33,27 +48,41 @@ export default function ViewBugs() {
 
     useEffect(() => {
         dispatch(fetchBugs());
-
-    }, [dispatch])
+    }, [dispatch, bugClicked]);
 
     return (
         <>
             <div className='w-full p-10 overflow-x-hidden'>
-                <select onChange={(e) => setSort(e.target.value)} className='text-black outline-none ml-9'>
-                    <option value="all">All</option>
-                    <option value="open">Open</option>
-                    <option value="completed">completed</option>
+                <div className='flex'>
+                    <div className='flex flex-col ml-9'>
+                        <label htmlFor="status">Status:</label>
+                        <select name='status' onChange={changeFilters} className='text-black outline-none mt-0'>
+                            <option value='all'>status</option>
+                            <option value="all">All</option>
+                            <option value="open">Open</option>
+                            <option value="completed">completed</option>
 
-                </select>
+                        </select>
+                    </div>
+                    <div className='flex flex-col ml-9'>
+                        <label htmlFor="status">Assignee:</label>
+                        <select name='name' onChange={changeFilters} className='text-black outline-none mt-0'>
+                            <option value="">All</option>
+                            <option value={user.userData.data.name}>Assigned to Me</option>
+                        </select>
+                    </div>
+                    <div className='flex flex-col ml-9'>
+                        <button>Rest Filters</button>
+                    </div>
+                </div>
                 <div className='p-2 h-full overflow-y-scroll w-full flex flex-col justify-start items-center gap-1'>
                     {bugs && bugs.filter((bug) => {
-                        if (sort === 'all') {
-                            return bug;
-                        } else if (sort === 'open') {
-                            return bug.status === 'open';
-                        } else {
-                            return bug.status === 'completed';
-                        }
+                        const status = filters.status
+                        const name = filters.name
+                        return (
+                            (status === 'all' || bug.status === status) &&
+                            (name === '' || bug.assigned === name)
+                        )
                     }).map((bug, index) => {
                         return (
                             <DashboardCards key={index} clicked={bugClicked} title={bug.name} details={bug.details} bug={bug} priority={bug.priority} />
