@@ -5,7 +5,6 @@ import { fetchBugs } from '../../../Controllers/bugController';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import BugView from '../BugView';
-import bug from '../../../Models/bugModel';
 
 export default function ViewBugs() {
     const dispatch = useDispatch();
@@ -36,11 +35,6 @@ export default function ViewBugs() {
         dispatch(fetchBugs());
 
     }, [dispatch])
-
-    // sort the bugs by status
-    const sortBugs = (status) => {
-        setSort(status);
-    }
 
     return (
         <>

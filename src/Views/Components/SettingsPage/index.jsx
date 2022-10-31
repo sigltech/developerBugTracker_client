@@ -2,19 +2,28 @@ import React, { useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { useDispatch } from 'react-redux';
 import { checkPassword, updateUser } from '../../../Controllers/authController';
-
+import ReactLoading from 'react-loading';
 
 export default function SettingsPage(props) {
     const dispatch = useDispatch();
+
+    // set loading state
+    const [loading, setLoading] = useState(false);
+
+    // set state for password newpassword, confirm password and the old password to check before updating
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [oldPasswordConfirm, setOldPasswordConfirm] = useState(null);
     const [oldPassword, setOldPassword] = useState('');
-    const [passwordMatch, setPasswordMatch] = useState(false);
 
+    // state for password match
+    const [passwordMatch, setPasswordMatch] = useState(true);
+
+    // state for password visibility
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
 
+    // state for successfull update
     const [passChangeSuccess, setPassChangeSuccess] = useState(false);
 
     const checkPasswordMatch = (e) => {
@@ -30,33 +39,43 @@ export default function SettingsPage(props) {
 
     const submitForm = (e) => {
         e.preventDefault();
-
-        console.log('form submitted');
-
-        dispatch(checkPassword({
-            password: oldPassword,
-            name: props.user.userData.data.name
-        })).then((res) => {
-            if (res.payload.message === 'Password is correct') {
-                setOldPasswordConfirm(true);
-            } else {
-                setOldPasswordConfirm(false);
-            }
-
-            // if old password is correct, update password
-            if (passwordMatch && oldPasswordConfirm === true) {
-                dispatch(updateUser({
-                    name: props.user.userData.data.name,
-                    password: password
-                })).then((res) => {
-                    setPassChangeSuccess(true);
-                }).catch((err) => {
-                    console.log(err);
-                });
-            }
-        }).catch((err) => {
-            console.log(err);
-        });
+        setOldPasswordConfirm(true);
+        try {
+            setLoading(true);
+            dispatch(checkPassword({
+                password: oldPassword,
+                name: props.user.userData.data.name
+            })).then((res) => {
+                if (res.payload.message === 'Password is correct') {
+                    // if old password is correct, update password
+                    if (passwordMatch) {
+                        dispatch(updateUser({
+                            name: props.user.userData.data.name,
+                            password: password
+                        })).then((res) => {
+                            setPassChangeSuccess(true);
+                            console.log('form submitted');
+                            setPasswordConfirm('')
+                            setPassword('')
+                            setPasswordMatch(false)
+                            // setOldPasswordConfirm('')
+                            setOldPassword('')
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                    }
+                } else {
+                    setOldPasswordConfirm(false);
+                }
+            }).catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
 
     }
 
@@ -85,7 +104,7 @@ export default function SettingsPage(props) {
                         <div className=' w-full flex flex-col my-10 border-2 px-10 py-12'>
                             <label className='text-2xl' htmlFor="newpassword">New password</label>
                             <div
-                                className={passwordMatch ? 'flex items-center border-2 rounded-md bg-white border-green-500' : 'flex items-center border-2 rounded-md bg-white px-2 border-red-500'}
+                                className={passwordMatch ? 'flex items-center border-2 rounded-md bg-white border-transparent' : 'flex items-center border-2 rounded-md bg-white px-2 border-red-500'}
                             >
                                 <input
                                     value={password}
@@ -107,7 +126,7 @@ export default function SettingsPage(props) {
                                 </span>
                             </div>
                             <label className='text-2xl' htmlFor="retrynewpassword">Re-enter new password</label>
-                            <div className={passwordMatch ? 'flex items-center border-2 rounded-md bg-white border-green-500' : 'flex items-center border-2 rounded-md bg-white px-2 border-red-500'}>
+                            <div className={passwordMatch ? 'flex items-center border-2 rounded-md bg-white border-transparent' : 'flex items-center border-2 rounded-md bg-white px-2 border-red-500'}>
                                 <input
                                     value={passwordConfirm}
                                     onChange={checkPasswordMatch}
@@ -127,9 +146,23 @@ export default function SettingsPage(props) {
                                 </span>
                             </div>
                         </div>
-                        <button className='button'>Update</button>
-                        {passChangeSuccess && <p className='text-green-500'>Password changed successfully</p>}
-                        {oldPasswordConfirm === false && <p className='text-red-500'>Old password is incorrect</p>}
+                        <button className='button'>
+                            {loading ?
+                                <span className='w-full flex justify-center'>
+                                    <ReactLoading type='spin' color='white' height={20} width={20} />
+                                </span>
+                                : 'Update'
+                            }
+                        </button>
+                        {passChangeSuccess &&
+                            <span className='w-full flex justify-center'>
+                                <p className='text-green-400 text-xl w-max'>Password changed successfully</p>
+                            </span>
+                        }
+                        {oldPasswordConfirm === false &&
+                            <p className='text-red-500'>Old password is incorrect</p>
+
+                        }
                     </form>
                 </div>
             </div >
