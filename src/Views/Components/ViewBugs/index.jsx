@@ -23,6 +23,14 @@ export default function ViewBugs() {
         status: 'all',
     });
 
+    const resetFilters = () => {
+        setFilters({
+            name: '',
+            priority: '',
+            status: 'all',
+        });
+    }
+
     const changeFilters = (e) => {
         setFilters({
             ...filters,
@@ -53,10 +61,10 @@ export default function ViewBugs() {
     return (
         <>
             <div className='w-full p-10 overflow-x-hidden'>
-                <div className='flex'>
+                <div className='flex items-end h-max'>
                     <div className='flex flex-col ml-9'>
                         <label htmlFor="status">Status:</label>
-                        <select name='status' onChange={changeFilters} className='text-black outline-none mt-0'>
+                        <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-0'>
                             <option value='all'>status</option>
                             <option value="all">All</option>
                             <option value="open">Open</option>
@@ -66,13 +74,13 @@ export default function ViewBugs() {
                     </div>
                     <div className='flex flex-col ml-9'>
                         <label htmlFor="status">Assignee:</label>
-                        <select name='name' onChange={changeFilters} className='text-black outline-none mt-0'>
+                        <select name='name' value={filters.name} onChange={changeFilters} className='text-black outline-none mt-0'>
                             <option value="">All</option>
                             <option value={user.userData.data.name}>Assigned to Me</option>
                         </select>
                     </div>
-                    <div className='flex flex-col ml-9'>
-                        <button>Rest Filters</button>
+                    <div className='flex justify-end items-center flex-col ml-9'>
+                        <button className='border-2 border-transparent bg-[#E2856E] rounded-md py-[3px] px-[20px] hover:bg-transparent hover:border-[#E2856E] transition-all duration-300 font-bold m-0' onClick={resetFilters}>Reset Filters</button>
                     </div>
                 </div>
                 <div className='p-2 h-full overflow-y-scroll w-full flex flex-col justify-start items-center gap-1'>
