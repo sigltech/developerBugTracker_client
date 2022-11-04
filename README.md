@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9b17d1e3-9a63-4a49-a705-9ed995cb69fa/deploy-status)](https://app.netlify.com/sites/siglbug-tracker/deploys)
 # Bug Tracking System Client
 
 ## Introduction
