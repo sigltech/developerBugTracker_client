@@ -5,12 +5,25 @@ import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { AiOutlineBug } from 'react-icons/ai';
 import { IoCreateOutline } from 'react-icons/io5';
 import { HiOutlineUserAdd } from 'react-icons/hi';
-// import { CgArrowsExpandRight, CgLogOut } from 'react-icons/cg';
+import { useNavigate } from 'react-router-dom';
+import { CgLogOut } from 'react-icons/cg';
+import { RiUserSettingsLine } from 'react-icons/ri';
 
 export default function BurgerMenu(props) {
+    const navigate = useNavigate();
+
+    const signout = () => {
+        props.signOut();
+    }
+
+    const userSettings = (e) => {
+        e.preventDefault();
+        navigate('/usersettings');
+        props.setMenu(!props.menuOpen);
+    }
     return (
         <div
-            className={props.menuOpen ? 'top-0 z-[99] flex justify-center items-center w-screen h-full absolute bg-[rgba(0,0,0,0.8)] overflow-hidden' : 'hidden'}>
+            className={props.menuOpen ? 'top-0 z-[99] flex justify-center items-center w-screen h-full absolute bg-[rgba(0,0,0,0.9)] overflow-hidden' : 'hidden'}>
             <div>
                 <ul>
                     <li>
@@ -47,6 +60,24 @@ export default function BurgerMenu(props) {
                                 <span className='nav-link-text animation-appear'>Register User</span>
                             </Link>
                         </li>}
+                    <div className='mt-32'>
+                        <li>
+                            <Link onClick={userSettings} className='nav-Link flex items-center text-4xl text-white font-normal mt-5 hover:underline' to='/viewbugs'>
+                                <span className='nav-link-icon mr-3'>
+                                    <RiUserSettingsLine />
+                                </span>
+                                <span className='nav-link-text animation-appear'>Settings</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link onClick={signout} className='nav-Link flex items-center text-4xl text-white font-normal mt-5 hover:underline' to='/viewbugs'>
+                                <span className='nav-link-icon mr-3'>
+                                    <CgLogOut />
+                                </span>
+                                <span className='nav-link-text animation-appear'>Logout</span>
+                            </Link>
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>

@@ -26,7 +26,7 @@ function App() {
         <Route path="*" element={
           <div className='w-screen h-screen flex flex-col justify-center items-center'>
             <h1 className='text-9xl'>404</h1>
-            <button className='button' onClick={() => navigate('/dashboard')}>Go back to dashboard</button>
+            <button className='button' onClick={() => navigate('/')}>Go back to dashboard</button>
           </div>
         } />
       </Routes>

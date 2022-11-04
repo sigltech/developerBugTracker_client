@@ -6,8 +6,11 @@ import { selectAllBugs, getBugsStatus, getBugsError } from '../../../Controllers
 import { fetchBugs } from '../../../Controllers/bugController';
 import { useSelector, useDispatch } from 'react-redux';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { logout } from '../../../Controllers/redux/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [burgerMenuOpen, setBurgerMenuOpen] = useState(false);
     const { user } = useSelector(state => state);
@@ -18,6 +21,16 @@ export default function Dashboard() {
     //eslint-disable-next-line
     const bugsError = useSelector(getBugsError);
 
+    const signOut = () => {
+        // delete localStorage items
+        window.localStorage.removeItem('BT_token');
+        window.localStorage.removeItem('BT_name');
+        window.localStorage.removeItem('BT_role');
+        navigate('/');
+        console.log('signing out');
+        dispatch(logout());
+    }
+
     useEffect(() => {
         dispatch(fetchBugs());
     }, [dispatch])
@@ -25,9 +38,9 @@ export default function Dashboard() {
     return (
         <div className='dashboard-container flex w-screen h-screen'>
             <GiHamburgerMenu onClick={() => setBurgerMenuOpen(!burgerMenuOpen)} className='fixed z-[99999] cursor-pointer left-4 top-4 md:hidden text-5xl text-[#E2856E] mt-4 ml-4' />
-            <BurgerMenu user={user} setMenu={setBurgerMenuOpen} menuOpen={burgerMenuOpen} />
+            <BurgerMenu user={user} setMenu={setBurgerMenuOpen} menuOpen={burgerMenuOpen} signOut={signOut} />
             <div className='w-[250px]'>
-                <Sidebar />
+                <Sidebar signOut={signOut} />
             </div>
             <MobileMenu />
             <Outlet />
