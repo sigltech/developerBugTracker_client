@@ -60,8 +60,8 @@ export default function ViewBugs() {
 
     return (
         <>
-            <div className='w-full p-10 overflow-x-hidden'>
-                <div className='flex items-end h-max'>
+            <div className='w-full md:p-10 py-10 px-3 overflow-x-hidden'>
+                <div className='flex flex-wrap items-end justify-end h-max pr-4 md:pr-10'>
                     <div className='flex flex-col ml-9'>
                         <label htmlFor="status">Status:</label>
                         <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-0'>
@@ -80,10 +80,10 @@ export default function ViewBugs() {
                         </select>
                     </div>
                     <div className='flex justify-end items-center flex-col ml-9'>
-                        <button className='border-2 border-transparent bg-[#E2856E] rounded-md py-[3px] px-[20px] hover:bg-transparent hover:border-[#E2856E] transition-all duration-300 font-bold m-0' onClick={resetFilters}>Reset Filters</button>
+                        <button className='border-2 border-transparent bg-[#E2856E] rounded-md py-[3px] px-[20px] hover:bg-transparent hover:border-[#E2856E] transition-all duration-300 font-bold my-4 md:m-0' onClick={resetFilters}>Reset Filters</button>
                     </div>
                 </div>
-                <div className='p-2 h-full overflow-y-scroll w-full flex flex-col justify-start items-center gap-1'>
+                <div className='md:p-2 h-full overflow-y-scroll w-full flex flex-col justify-start items-center gap-1'>
                     {bugs && bugs.filter((bug) => {
                         const status = filters.status
                         const name = filters.name
