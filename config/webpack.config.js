@@ -320,11 +320,6 @@ module.exports = function (webpackEnv) {
         }),
         ...(modules.webpackAliases || {}),
       },
-      devServer: {
-        historyApiFallback: true,
-        contentBase: './',
-        hot: true
-      },
       plugins: [
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.
@@ -566,6 +561,11 @@ module.exports = function (webpackEnv) {
           ],
         },
       ].filter(Boolean),
+    },
+    devServer: {
+      historyApiFallback: true,
+      contentBase: './',
+      hot: true
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
