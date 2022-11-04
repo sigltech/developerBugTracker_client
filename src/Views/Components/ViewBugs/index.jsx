@@ -61,7 +61,7 @@ export default function ViewBugs() {
     return (
         <>
             <div className='w-full md:p-10 py-10 px-3 overflow-x-hidden'>
-                <div className='flex flex-wrap items-end justify-end h-max pr-4 md:pr-10'>
+                <div className='flex flex-wrap items-end justify-end h-max pr-4 md:pr-10 z-50'>
                     <div className='flex flex-col ml-9'>
                         <label htmlFor="status">Status:</label>
                         <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-0'>
