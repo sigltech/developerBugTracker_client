@@ -24,7 +24,7 @@ export default function MobileMenu(props) {
                         <span className='nav-link-icon text-2xl mr-3'>
                             <AiOutlineBug />
                         </span>
-                        <span>View Tickets</span>
+                        <span>View Bugs</span>
                     </button>
                 </div>
                 {user.admin &&
@@ -33,7 +33,7 @@ export default function MobileMenu(props) {
                             <span className='nav-link-icon text-2xl mr-3'>
                                 <IoCreateOutline />
                             </span>
-                            <span>Create new ticket</span>
+                            <span>Create Bug</span>
                         </button>
                     </div>
                 }

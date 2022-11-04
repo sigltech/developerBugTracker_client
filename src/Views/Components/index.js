@@ -8,3 +8,4 @@ export { default as MobileMenu } from './MobileMenu';
 export { default as NewUser } from './NewUser';
 export { default as SettingsPage } from './SettingsPage';
 export { default as NewUserInfoModal } from './NewUserInfoModal';
+export { default as BurgerMenu } from './BurgerMenu';
