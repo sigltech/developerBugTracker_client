@@ -9,33 +9,17 @@ import { HiOutlineUserAdd } from 'react-icons/hi';
 //eslint-disable-next-line
 import { CgArrowsExpandRight, CgLogOut } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../../Controllers/redux/authSlice';
+import { useSelector } from 'react-redux';
 import './index.css';
 
 
-export default function Sidebar() {
-    const dispatch = useDispatch();
+export default function Sidebar(props) {
     const navigate = useNavigate();
+
+    //eslint-disable-next-line
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const username = window.localStorage.getItem('BT_name');
     const { user } = useSelector(state => state);
-
-
-    const signOut = () => {
-        dispatch(logout());
-        // delete localStorage items
-        window.localStorage.removeItem('BT_token');
-        window.localStorage.removeItem('BT_name');
-        window.localStorage.removeItem('BT_role');
-        navigate('/');
-
-    }
-
-    //eslint-disable-next-line
-    const handleCloseSidebar = () => {
-        setSidebarOpen(!sidebarOpen);
-    }
 
     return (
         <div className='sidebar-container hidden md:flex grid-cols-1 bg-[#2E2E3A] w-[250px] h-screen flex-col items-center'>
@@ -87,9 +71,9 @@ export default function Sidebar() {
                     </span>
                 }
                 {sidebarOpen ?
-                    <button className="button nav-link logout animation-appear" onClick={signOut}>Logout</button>
+                    <button className="button nav-link logout animation-appear" onClick={props.signOut}>Logout</button>
                     :
-                    <span className='nav-link-icon' onClick={signOut}>
+                    <span className='nav-link-icon' onClick={props.signOut}>
                         <CgLogOut fontSize={'30px'} />
                     </span>
                 }
