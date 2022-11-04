@@ -22,7 +22,7 @@ export default function Sidebar(props) {
     const { user } = useSelector(state => state);
 
     return (
-        <div className='sidebar-container hidden md:flex grid-cols-1 bg-[#2E2E3A] w-[250px] h-screen flex-col items-center'>
+        <div className='sidebar-container fixed md:flex grid-cols-1 bg-[#2E2E3A] w-[250px] h-screen flex-col items-center'>
             <h1 className='mt-4 text-2xl text-center'>Hello, <br /> <span className='font-bold text-[#E2856E] underline'>{username}</span></h1>
             <div className='mt-[10rem]'>
                 <ul>

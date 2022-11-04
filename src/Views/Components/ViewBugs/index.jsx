@@ -56,15 +56,16 @@ export default function ViewBugs() {
 
     useEffect(() => {
         dispatch(fetchBugs());
-    }, [dispatch, bugClicked]);
+        console.log('fetching bugs');
+    }, [dispatch]);
 
     return (
         <>
-            <div className='w-full md:p-10 py-10 px-3 overflow-x-hidden'>
-                <div className='flex flex-wrap items-end justify-end h-max pr-4 md:pr-10 z-50'>
-                    <div className='flex flex-col ml-9'>
+            <div className='w-full md:p-10 py-10 px-3 overflow-x-hidden z-30'>
+                <div className='flex w-full items-center justify-end h-max md:pr-5 z-50'>
+                    <div className='flex ml-9 mx-6 p-3 items-end '>
                         <label htmlFor="status">Status:</label>
-                        <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-0'>
+                        <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-4 mx-2 z-30'>
                             <option value='all'>status</option>
                             <option value="all">All</option>
                             <option value="open">Open</option>
@@ -72,15 +73,37 @@ export default function ViewBugs() {
 
                         </select>
                     </div>
-                    <div className='flex flex-col ml-9'>
+                    <div className='flex ml-9 mx-6 p-3 items-end '>
                         <label htmlFor="status">Assignee:</label>
-                        <select name='name' value={filters.name} onChange={changeFilters} className='text-black outline-none mt-0'>
+                        <select name='name' value={filters.name} onChange={changeFilters} className='text-black outline-none mt-4 mx-2 z-30'>
                             <option value="">All</option>
                             <option value={user.userData.data.name}>Assigned to Me</option>
                         </select>
                     </div>
-                    <div className='flex justify-end items-center flex-col ml-9'>
-                        <button className='border-2 border-transparent bg-[#E2856E] rounded-md py-[3px] px-[20px] hover:bg-transparent hover:border-[#E2856E] transition-all duration-300 font-bold my-4 md:m-0' onClick={resetFilters}>Reset Filters</button>
+                    <div className='flex justify-center items-center ml-9 mx-6'>
+                        <button
+                            className={
+                                `w-full
+                                h-full
+                                text-sm
+                                border-2
+                                md:py-2
+                                border-transparent
+                                bg-[#E2856E]
+                                rounded-md
+                                py-[3px]
+                                px-[20px]
+                                hover:bg-transparent
+                                hover:border-[#E2856E]
+                                transition-all
+                                duration-300
+                                font-bold
+                                my-4
+                                md:m-0`
+                            }
+                            onClick={resetFilters}>
+                            Reset Filters
+                        </button>
                     </div>
                 </div>
                 <div className='md:p-2 h-full overflow-y-scroll w-full flex flex-col justify-start items-center gap-1'>
