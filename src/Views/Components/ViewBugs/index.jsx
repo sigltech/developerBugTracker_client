@@ -62,10 +62,10 @@ export default function ViewBugs() {
     return (
         <>
             <div className='w-full md:p-10 py-10 px-3 overflow-x-hidden z-30'>
-                <div className='flex w-full items-center justify-end h-max md:pr-5 z-50'>
-                    <div className='flex ml-9 mx-6 p-3 items-end '>
+                <div className='flex flex-wrap items-center justify-end p-0 w-full h-max md:pr-5 z-50'>
+                    <div className='flex ml-9 md:ml-6 p-3 items-end '>
                         <label htmlFor="status">Status:</label>
-                        <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-4 mx-2 z-30'>
+                        <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-4 md:m-0 ml-2 z-30'>
                             <option value='all'>status</option>
                             <option value="all">All</option>
                             <option value="open">Open</option>
@@ -73,17 +73,17 @@ export default function ViewBugs() {
 
                         </select>
                     </div>
-                    <div className='flex ml-9 mx-6 p-3 items-end '>
+                    <div className='flex ml-9 m-0 p-3 items-end jusitfy-end '>
                         <label htmlFor="status">Assignee:</label>
                         <select name='name' value={filters.name} onChange={changeFilters} className='text-black outline-none mt-4 mx-2 z-30'>
                             <option value="">All</option>
                             <option value={user.userData.data.name}>Assigned to Me</option>
                         </select>
                     </div>
-                    <div className='flex justify-center items-center ml-9 mx-6'>
+                    <div className='flex md:justify-end justify-center items-center ml-9 mx-6'>
                         <button
                             className={
-                                `w-full
+                                `w-[200px]
                                 h-full
                                 text-sm
                                 border-2

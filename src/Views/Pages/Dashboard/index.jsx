@@ -39,7 +39,7 @@ export default function Dashboard() {
         <div className='dashboard-container flex w-screen h-screen'>
             <GiHamburgerMenu onClick={() => setBurgerMenuOpen(!burgerMenuOpen)} className='fixed z-[99999] cursor-pointer left-4 top-4 md:hidden text-5xl text-[#E2856E] mt-4 ml-4' />
             <BurgerMenu user={user} setMenu={setBurgerMenuOpen} menuOpen={burgerMenuOpen} signOut={signOut} />
-            <div className='md:w-[250px]'>
+            <div className='md:w-[250px] hidden md:block'>
                 <Sidebar signOut={signOut} />
             </div>
             <MobileMenu />

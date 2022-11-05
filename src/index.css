@@ -26,9 +26,9 @@
     background-color: var(--buttonColor);
     border: none;
     border-radius: 5px;
-    padding: 8px 30px;
+    padding: 9px 30px;
     color: #ffffff;
-    font: normal bold 1.2rem 'Open Sans', sans-serif;
+    font: normal bold 1rem 'Open Sans', sans-serif;
     cursor: pointer;
     margin-bottom: 10px;
     border: 2px solid transparent;

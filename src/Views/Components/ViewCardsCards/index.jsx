@@ -15,7 +15,7 @@ export default function ViewCardsCards(props) {
             <h2 className="name w-[30%] rounded-md p-4 md:mx-3">{name}</h2>
             <h4 className="priority rounded-md p-4 md:mx-3">{level}</h4>
             <h5 className="version rounded-md p-4 mx-3">{version}</h5>
-            <button onClick={clicked} className='md:button border-transparent border-2 rounded-md px-4 bg-[#E2856E] md:h-full h-max text-white md:mb-0 hover:border-[#E2856E] hover:bg-transparent hover:text-[#E2856E]'>Info</button>
+            <button onClick={clicked} className='md:button border-transparent border-2 w-[150px] rounded-md px-4 bg-[#E2856E] md:h-max h-max text-white md:mb-0 hover:border-[#E2856E] hover:bg-transparent hover:text-[#E2856E]'>Info</button>
         </div>
     )
 }
