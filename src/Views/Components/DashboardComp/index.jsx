@@ -44,6 +44,9 @@ export default function DashboardComp() {
             <Card priority='1' count={highCount} clicked={() => redirect('/viewbugs')} />
             <Card priority='2' count={mediumCount} clicked={() => redirect('/viewbugs')} />
             <Card priority='3' count={lowCount} clicked={() => redirect('/viewbugs')} />
+            <div>
+
+            </div>
         </div>
     )
 }

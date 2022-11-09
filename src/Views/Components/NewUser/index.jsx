@@ -44,8 +44,11 @@ export default function NewUser() {
 
     const copyToClipboard = (e) => {
         e.preventDefault();
-        navigator.clipboard.writeText(e.target.innerHTML); // copy to clipboard
-        alert('copied to clipboard!'); // display success message
+        navigator.clipboard.writeText(e.target.innerHTML).then(() => {
+            alert('Password copied to clipboard!');
+        });
+        // copy to clipboard
+        // display success message
     }
 
     return (
