@@ -93,26 +93,26 @@ export default function SettingsPage(props) {
                             className='opacity-50 focus:outline-none px-4 py-2 text-black text-md rounded-md'
                             value={props.user.userData.data.name}
                         />
-                        <label className='text-2xl' htmlFor="oldpassword">Old password</label>
+                        <label className='text-2xl' htmlFor="current-password">Old password</label>
                         <input
                             onChange={checkOldPassword}
                             value={oldPassword}
                             type="password"
-                            name='oldpassword'
+                            name='current-password'
                             className='px-4 py-2 text-black text-md rounded-md'
 
                         />
                         <div className=' w-full flex flex-col my-10 border-2 px-10 py-12'>
-                            <label className='text-2xl' htmlFor="newpassword">New password</label>
+                            <label className='text-2xl' htmlFor="new-password">New password</label>
                             <div
                                 className={passwordMatch ? 'flex items-center border-2 rounded-md bg-white border-transparent' : 'flex items-center border-2 rounded-md bg-white px-2 border-red-500'}
                             >
                                 <input
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    id='newpassword'
+                                    id='new-password'
                                     type={showPassword ? 'text' : 'password'}
-                                    name='newpassword'
+                                    name='new-password'
                                     className='outline-none px-2 py-2 w-full text-black text-md'
 
                                 />
@@ -126,14 +126,14 @@ export default function SettingsPage(props) {
                                     /> : <AiOutlineEyeInvisible className='text-2xl' />}
                                 </span>
                             </div>
-                            <label className='text-2xl' htmlFor="retrynewpassword">Re-enter new password</label>
+                            <label className='text-2xl' htmlFor="retry-new-password">Re-enter new password</label>
                             <div className={passwordMatch ? 'flex items-center border-2 rounded-md bg-white border-transparent' : 'flex items-center border-2 rounded-md bg-white px-2 border-red-500'}>
                                 <input
                                     value={passwordConfirm}
                                     onChange={checkPasswordMatch}
-                                    id='retrynewpassword'
+                                    id='retry-new-password'
                                     type={showPassword2 ? 'text' : 'password'}
-                                    name='retrynewpassword'
+                                    name='retry-new-password'
                                     className='outline-none px-4 py-2 text-black text-md w-full'
                                 />
                                 <span

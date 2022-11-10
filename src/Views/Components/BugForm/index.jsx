@@ -19,20 +19,15 @@ export default function BugForm(props) {
     const bugsStatus = useSelector(getBugsStatus);
     //eslint-disable-next-line
     const user = useSelector((state) => state.user);
+    const [bugCreated, setBugCreated] = useState(false);
 
     const inputChanged = (e) => {
         setBugObject({
             ...bugObject,
+            priority: "3",
             [e.target.name]: e.target.value
         });
     }
-
-    useEffect(() => {
-        dispatch(getAllUsers()).then((res) => {
-            setAllUsers(res.payload);
-        });
-        //eslint-disable-next-line
-    }, [setAllUsers, dispatch]);
 
     //eslint-disable-next-line
     const canSave =
@@ -52,21 +47,32 @@ export default function BugForm(props) {
                 dispatch(updateBug(bugObject));
                 setStatus('idle');
                 dispatch(fetchBugs());
-                navigate('/viewbugs');
                 props.close();
             }
             else {
                 setStatus('loading');
                 bugObject._id = Math.random().toString(36).substr(2, 9);
                 dispatch(addBug(bugObject));
+                setBugCreated(true);
                 setStatus('idle');
+                dispatch(fetchBugs());
                 props.close();
             }
+            navigate('/viewbugs');
 
         } catch (error) {
             setStatus('failed');
         }
     }
+
+    useEffect(() => {
+        dispatch(getAllUsers()).then((res) => {
+            setAllUsers(res.payload);
+        });
+        if (status === 'idle') {
+            setBugCreated(false);
+        }
+    }, [setAllUsers, dispatch, status]);
 
     return (
         <div className='bug-create'>
@@ -127,7 +133,9 @@ export default function BugForm(props) {
                     value={bugObject.assigned}
                     name="assigned"
                     id="assigned"
+                    required
                 >
+                    <option value="">Unassigned</option>
                     {allUsers.map((user, index) => {
                         return <option key={index} value={user.name}>{user.name}</option>
                     })}
@@ -152,7 +160,13 @@ export default function BugForm(props) {
                         :
                         props.title === "Edit Bug" ? "Edit" : "Create"}
                 </button>
-            </form>
-        </div>
+                {bugCreated ?
+                    <div className='success-msg w-full'>
+                        <span className='w-full text-center block'>Success!</span>
+                    </div>
+                    : null
+                }
+            </form >
+        </div >
     )
 }
