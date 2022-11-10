@@ -44,7 +44,6 @@ export default function ViewBugs() {
         name: '',
         isDisplayed: false
     });
-
     // set the bug to display in the info modal
     //eslint-disable-next-line
     const bugClicked = (name) => {
@@ -63,6 +62,16 @@ export default function ViewBugs() {
         <>
             <div className='w-full md:p-10 py-10 px-3 overflow-x-hidden z-30'>
                 <div className='flex flex-wrap items-center justify-end p-0 w-full h-max md:pr-5 z-50'>
+                    <div className='flex ml-9 m-0 p-3 items-end jusitfy-end '>
+                        <label htmlFor="priority">Priority:</label>
+                        <select name='priority' value={filters.priority} onChange={changeFilters} className='text-black outline-none mt-4 mx-2 z-30'>
+                            <option value=''>Priority</option>
+                            <option value="1">High</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Low</option>
+
+                        </select>
+                    </div>
                     <div className='flex ml-9 m-0 p-3 items-end jusitfy-end '>
                         <label htmlFor="status">Status:</label>
                         <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-4 mx-2 z-30'>
@@ -110,9 +119,11 @@ export default function ViewBugs() {
                     {bugs && bugs.filter((bug) => {
                         const status = filters.status
                         const name = filters.name
+                        const priority = filters.priority
                         return (
                             (status === 'all' || bug.status === status) &&
-                            (name === '' || bug.assigned === name)
+                            (name === '' || bug.assigned === name) &&
+                            (priority === '' || bug.priority === priority)
                         )
                     }).map((bug, index) => {
                         return (

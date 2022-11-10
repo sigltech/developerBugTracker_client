@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import EditPanel from '../Edit&Delete/EditPanel';
 import EditBug from '../BugForm';
 import { updateBug } from '../../../Controllers/bugController';
+import { fetchBugs } from '../../../Controllers/bugController';
 
 export default function BugView(props) {
     const dispatch = useDispatch();
@@ -28,7 +29,9 @@ export default function BugView(props) {
     }
 
     const handleBugStatus = (e) => {
-        dispatch(updateBug({ ...bug, status: 'completed' }));
+        dispatch(updateBug({ ...bug, status: 'completed' })).then(() => {
+            dispatch(fetchBugs());
+        })
         closeView();
     }
 
