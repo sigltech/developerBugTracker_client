@@ -52,6 +52,7 @@ export default function BugView(props) {
                 <BugViewSection title='Created On' info={bug.time} />
                 <BugViewSection title='status' info={bug.status} />
                 <BugViewSection title='Assigned' info={bug.assigned} />
+
                 <button className='button w-[40%] ml-2' onClick={handleBugStatus}>Mark Complete</button>
             </div>
             {displayEdit && <EditBug closeAll={closeAll} close={editClicked} title='Edit Bug' bug={bug} />}

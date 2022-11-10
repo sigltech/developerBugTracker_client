@@ -63,9 +63,9 @@ export default function ViewBugs() {
         <>
             <div className='w-full md:p-10 py-10 px-3 overflow-x-hidden z-30'>
                 <div className='flex flex-wrap items-center justify-end p-0 w-full h-max md:pr-5 z-50'>
-                    <div className='flex ml-9 md:ml-6 p-3 items-end '>
+                    <div className='flex ml-9 m-0 p-3 items-end jusitfy-end '>
                         <label htmlFor="status">Status:</label>
-                        <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-4 md:m-0 ml-2 z-30'>
+                        <select name='status' value={filters.status} onChange={changeFilters} className='text-black outline-none mt-4 mx-2 z-30'>
                             <option value='all'>status</option>
                             <option value="all">All</option>
                             <option value="open">Open</option>

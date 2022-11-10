@@ -9,11 +9,16 @@
     margin: 1%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     color: #000000;
-    top: 5%;
-    right: 7%;
-    height: 80vh;
+    top: 2%;
+    right: 9%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow: scroll;
+    padding: 20px;
+    padding-top: 0;
+    box-shadow: 0 0 30px 8px rgba(0, 0, 0, 0.5);
 }
 
 .bug-view h1 {

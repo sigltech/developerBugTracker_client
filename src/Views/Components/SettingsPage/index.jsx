@@ -87,9 +87,10 @@ export default function SettingsPage(props) {
                     <form onSubmit={submitForm} className='flex flex-col w-[50%] items-center]'>
                         <label className='text-2xl' htmlFor="name">Name</label>
                         <input
+                            disabled={true}
                             type="text"
                             name='name'
-                            className='px-4 py-2 text-black text-md rounded-md'
+                            className='opacity-50 focus:outline-none px-4 py-2 text-black text-md rounded-md'
                             value={props.user.userData.data.name}
                         />
                         <label className='text-2xl' htmlFor="oldpassword">Old password</label>
